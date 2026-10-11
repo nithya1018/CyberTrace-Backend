@@ -163,7 +163,7 @@ DB_URL=jdbc:mysql://<mysql-host>:3306/cybertrace_db?useSSL=true&serverTimezone=U
 DB_USERNAME=<mysql-user>
 DB_PASSWORD=<mysql-password>
 JWT_SECRET=<random-secret-at-least-32-bytes>
-CORS_ALLOWED_ORIGINS=https://cyber-trace-frontend-alpha.vercel.app
+CORS_ALLOWED_ORIGINS=https://cyber-trace-frontend-alpha.vercel.app,https://cybertrace-backend-production-a0e9.up.railway.app
 ADMIN_NAME=Administrator
 ADMIN_EMAIL=admin@example.com
 ADMIN_PASSWORD=<strong-admin-password>
@@ -171,4 +171,4 @@ ADMIN_PASSWORD=<strong-admin-password>
 
 `ADMIN_EMAIL` and `ADMIN_PASSWORD` optionally bootstrap an administrator at startup when that email is not already registered. Configure them as Railway secrets; never put the password in frontend code or public documentation. Public self-registration always creates investigator accounts.
 
-Generate a Railway public domain for the service. In the Vercel frontend project's Production environment, set `VITE_API_URL` to `https://<railway-domain>/api`, then redeploy the frontend. The frontend's `VITE_API_URL` and the backend's `CORS_ALLOWED_ORIGINS` must point to the Railway API and the Vercel production domain respectively for sign-in and API requests to work.
+Generate a Railway public domain for the service. In the Vercel frontend project's Production environment, set `VITE_API_URL` to `https://<railway-domain>/api`, then redeploy the frontend. The backend's `CORS_ALLOWED_ORIGINS` must include the Vercel production domain and the Railway domain itself so both the frontend and the same-origin database console can sign in.
