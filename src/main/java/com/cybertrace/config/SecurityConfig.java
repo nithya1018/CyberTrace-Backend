@@ -29,7 +29,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-    @Value("${app.cors.allowed-origins:http://localhost:3000,http://localhost:5173,https://cyber-trace-frontend.vercel.app}")
+    @Value("${app.cors.allowed-origins:http://localhost:3000,http://localhost:5173,https://cyber-trace-frontend-alpha.vercel.app}")
     private String allowedOrigins;
 
     private final JwtAuthFilter jwtAuthFilter;

@@ -22,6 +22,7 @@ Built using Java and Spring Boot, the backend exposes REST APIs that connect the
 - [API Overview](#-api-overview)
 - [Authentication and Authorization](#-authentication-and-authorization)
 - [Frontend Integration](#-frontend-integration)
+- [Railway Deployment](#-railway-deployment)
 - [Demo Access](#-demo-access)
 - [Security Considerations](#-security-considerations)
 - [Future Enhancements](#-future-enhancements)
@@ -152,3 +153,17 @@ CyberTrace Backend uses a layered architecture.
 │  Investigation Notes          │
 │  Audit Records                │
 └──────────────────────────────┘
+
+## 🚆 Railway Deployment
+
+Deploy this repository to Railway using its root `Dockerfile`. Configure these variables on the Railway service:
+
+```env
+DB_URL=jdbc:mysql://<mysql-host>:3306/cybertrace_db?useSSL=true&serverTimezone=UTC
+DB_USERNAME=<mysql-user>
+DB_PASSWORD=<mysql-password>
+JWT_SECRET=<random-secret-at-least-32-bytes>
+CORS_ALLOWED_ORIGINS=https://cyber-trace-frontend-alpha.vercel.app
+```
+
+Generate a Railway public domain for the service. In the Vercel frontend project's Production environment, set `VITE_API_URL` to `https://<railway-domain>/api`, then redeploy the frontend. The frontend's `VITE_API_URL` and the backend's `CORS_ALLOWED_ORIGINS` must point to the Railway API and the Vercel production domain respectively for sign-in and API requests to work.
