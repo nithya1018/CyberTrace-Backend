@@ -19,7 +19,9 @@ public class UserService {
     }
 
     public List<User> getInvestigators() {
-        return userRepository.findByRole_Name(RoleName.INVESTIGATOR);
+        return userRepository.findByRole_Name(RoleName.INVESTIGATOR).stream()
+                .filter(User::isEnabled)
+                .toList();
     }
 
     public User getUserById(Long id) {

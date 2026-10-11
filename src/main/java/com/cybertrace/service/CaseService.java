@@ -36,17 +36,21 @@ public class CaseService {
                     "Selected user is not an investigator");
         }
 
+        if (!user.isEnabled()) {
+            throw new IllegalArgumentException(
+                    "Selected investigator is disabled");
+        }
+
         return user;
     }
 
     // CREATE
     public ForensicCase createCase(CaseRequest request, User creator) {
 
-        User assignedTo = null;
-
-        if (request.getAssignedToUserId() != null) {
-            assignedTo = findInvestigator(request.getAssignedToUserId());
+        if (request.getAssignedToUserId() == null) {
+            throw new IllegalArgumentException("Choose an investigator before creating a case");
         }
+        User assignedTo = findInvestigator(request.getAssignedToUserId());
 
         ForensicCase forensicCase = ForensicCase.builder()
                 .title(request.getTitle())

@@ -46,10 +46,13 @@ public class CaseController {
         }
     }
 
-    // CREATE (admin) - can include assignedToUserId
+    // CREATE (admin) - an investigator must be assigned to every new case
     @PostMapping
     public ForensicCase create(@Valid @RequestBody CaseRequest request, Authentication auth) {
         requireAdmin(auth);
+        if (request.getAssignedToUserId() == null) {
+            throw new IllegalArgumentException("Choose an investigator before creating a case");
+        }
         return caseService.createCase(request, currentUser(auth));
     }
 
