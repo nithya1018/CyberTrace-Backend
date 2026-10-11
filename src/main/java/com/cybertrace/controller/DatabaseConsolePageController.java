@@ -8,7 +8,7 @@ public class DatabaseConsolePageController {
 
     @GetMapping("/")
     public String home() {
-        return "redirect:/database";
+        return "forward:/database.html";
     }
 
     @GetMapping("/database")
