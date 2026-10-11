@@ -164,6 +164,11 @@ DB_USERNAME=<mysql-user>
 DB_PASSWORD=<mysql-password>
 JWT_SECRET=<random-secret-at-least-32-bytes>
 CORS_ALLOWED_ORIGINS=https://cyber-trace-frontend-alpha.vercel.app
+ADMIN_NAME=Administrator
+ADMIN_EMAIL=admin@example.com
+ADMIN_PASSWORD=<strong-admin-password>
 ```
+
+`ADMIN_EMAIL` and `ADMIN_PASSWORD` optionally bootstrap an administrator at startup when that email is not already registered. Configure them as Railway secrets; never put the password in frontend code or public documentation. Public self-registration always creates investigator accounts.
 
 Generate a Railway public domain for the service. In the Vercel frontend project's Production environment, set `VITE_API_URL` to `https://<railway-domain>/api`, then redeploy the frontend. The frontend's `VITE_API_URL` and the backend's `CORS_ALLOWED_ORIGINS` must point to the Railway API and the Vercel production domain respectively for sign-in and API requests to work.

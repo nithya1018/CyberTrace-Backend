@@ -29,12 +29,8 @@ public class AuthService {
             throw new IllegalArgumentException("Email already registered");
         }
 
-        RoleName roleName;
-        try {
-            roleName = RoleName.valueOf(request.getRole().toUpperCase());
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("Role must be ADMIN or INVESTIGATOR");
-        }
+        // Public registration must never allow a caller to grant themselves admin access.
+        RoleName roleName = RoleName.INVESTIGATOR;
 
         Role role = roleRepository.findByName(roleName)
                 .orElseThrow(() -> new IllegalStateException("Role not seeded: " + roleName));
